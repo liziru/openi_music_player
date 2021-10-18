@@ -34,6 +34,7 @@ mlclient = musicdl.musicdl(
 records = {}
 
 from music_player import Musicplayer
+
 mplayer = Musicplayer()
 
 # global config.
@@ -147,7 +148,7 @@ def start():
     # print("test")
 
     # switch to pause button
-    tkinter.Button(top, text="Pause", command=pause, width=2, height=2, bg="sky blue").place(relx=0.5, rely=0.95,
+    tkinter.Button(top, text="Pause", command=pause, width=btn_play["width"], height=btn_play["height"], bg="sky blue").place(relx=0.5, rely=0.95,
                                                                                              anchor=CENTER)
 
 
@@ -209,12 +210,13 @@ def play_selected():
         songinfo = records.get(item[0], '')
         if songinfo:
             print(songinfo)
-            print(os.path.join(songinfo['savedir'], songinfo['savename']+'.'+songinfo['ext']))
+            print(os.path.join(songinfo['savedir'], songinfo['savename'] + '.' + songinfo['ext']))
             songinfos.append(songinfo)
     mlclient.download(songinfos)
     # print(songinfos[0].keys)
     mplayer.set_config(songinfos)
     mplayer.play()
+
 
 def play_all():
     songinfos = []
@@ -225,12 +227,14 @@ def play_all():
             songinfos.append(songinfo)
     mlclient.download(songinfos)
 
+
 def search_music_in_musicdl():
     global records
     keyword = search_entry.get()
     print("INFO: search keyword:{}".format(keyword))
     song_items, records = mlclient.run_by_input(['qq', 'netease'], keyword)
     valores.set(song_items)
+
 
 if __name__ == '__main__':
     img_open = Image.open(picture_path, "r").resize((img_width, img_height))
@@ -319,11 +323,12 @@ if __name__ == '__main__':
     # ranloop.place(x=20, y=180)
 
     # 开始，暂停，继续播放，结束播放
-    tkinter.Button(top, text="Play", command=start, width=2, height=2, bg="sky blue").place(relx=0.5, rely=0.95,
-                                                                                            anchor=CENTER)
-    tkinter.Button(top, text="End", command=stop, width=2, height=2, bg="sky blue").place(relx=0.5, rely=0.95,
-                                                                                          anchor=CENTER,
-                                                                                          x=40, y=0)
+    btn_play = tkinter.Button(top, text="Play", command=start, width=2, height=2, bg="sky blue")
+    btn_play.place(relx=0.5, rely=0.95, anchor=CENTER)
+    tkinter.Button(top, text="End", command=stop, width=btn_play.cget("width"), height=btn_play["height"], bg="sky blue").place(relx=0.5,
+                                                                                                       rely=0.95,
+                                                                                                       anchor=CENTER,
+                                                                                                       x=40, y=0)
     tkinter.Button(top, text="-1", command=mplayer_backsong, width=2, height=2, bg="sky blue").place(relx=0.5,
                                                                                                      rely=0.95,
                                                                                                      anchor=CENTER,
@@ -340,7 +345,7 @@ if __name__ == '__main__':
     # # tkinter.Button(top, text="随机编曲", command=create, width=7, bg="sky blue").place(x=170, y=165)
     #
     # 音量
-    volume.set(50)
+    volume.set(20)
     volume_scale_bar = tkinter.Scale(top, from_=0, to=100, orient="horizontal", width=3, length=100, variable=volume,
                                      command=set_volume)
     volume_scale_bar.place(x=20, y=360)
