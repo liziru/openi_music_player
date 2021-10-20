@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['../openi_player_main.py'],
-             pathex=['/home/lee/Desktop/workspace/tests/open_project/openi_music_player/package'],
+             pathex=['/home/lee/Desktop/workspace/OSP/openi_music_player/package'],
              binaries=[],
              datas=[],
              hiddenimports=['PIL._tkinter_finder'],

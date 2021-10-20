@@ -1,8 +1,9 @@
-#### Functions of music player brief.
-v1 brief:
+#### Goals of music player brief.
+
+## v1.1 goal:
+    1, problem: read image path and music saving path in windows.
+    2, play song lyric when playing music
+
+## v1 goal:
     1.1 pause,play/show music list/show picture/open files dir/set volume/show progress bar/play list mode - musicdl
 
-
-v2 brief
-    1, adjust progress bar
-    2,

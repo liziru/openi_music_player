@@ -27,7 +27,7 @@ class Musicplayer():
         # pygame.mixer.init()
         # musicdl init.
         self.mlclient = musicdl.musicdl(
-            config={'logfilepath': 'player.log', 'savedir': '/home/lee/Desktop/workspace/tests/open_project/openi_music_player/download/music', 'search_size_per_source': 5,
+            config={'logfilepath': 'player.log', 'savedir': '/home/lee/Desktop/workspace/OSP/openi_music_player/download/music', 'search_size_per_source': 5,
                     'proxies': {}})
         # self.musicdl_srcs = ['qq', 'netease']
         self.musicdl_srcs = [

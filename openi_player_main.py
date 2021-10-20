@@ -24,7 +24,7 @@ from tkinter import ttk
 from Musicplayer import Musicplayer
 
 # path config.
-picture_path = '/home/lee/Desktop/workspace/tests/open_project/openi_music_player/download/images/rain01.jpg'
+picture_path = '/home/lee/Desktop/workspace/OSP/openi_music_player/download/images/rain01.jpg'
 img_width, img_height = 480, 360
 
 # Musicplayer init.
