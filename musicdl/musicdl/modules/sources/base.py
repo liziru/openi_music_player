@@ -23,13 +23,18 @@ class Base():
         raise NotImplementedError('not be implemented...')
     '''歌曲下载'''
     def download(self, songinfos):
+        songinfos_avail = []
         for songinfo in songinfos:
             self.logger_handle.info('正在从%s下载 ——> %s...' % (self.source, songinfo['savename']))
             task = Downloader(songinfo, self.session)
             if task.start():
                 self.logger_handle.info('成功从%s下载到了 ——> %s...' % (self.source, songinfo['savename']))
+                songinfos_avail.append(songinfo)
             else:
                 self.logger_handle.info('无法从%s下载 ——> %s...' % (self.source, songinfo['savename']))
+
+        return songinfos_avail
+
     '''初始化'''
     def __initialize(self):
         raise NotImplementedError('not be implemented...')

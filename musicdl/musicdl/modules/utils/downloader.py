@@ -6,20 +6,25 @@ Author:
 微信公众号:
     Charles的皮卡丘
 '''
+import json
 import click
 import warnings
 import requests
 from .misc import *
+
 warnings.filterwarnings('ignore')
 
-
 '''下载器类'''
+
+
 class Downloader():
     def __init__(self, songinfo, session=None, **kwargs):
         self.songinfo = songinfo
         self.session = requests.Session() if session is None else session
         self.__setheaders(songinfo['source'])
+
     '''外部调用'''
+
     def start(self):
         songinfo, session, headers = self.songinfo, self.session, self.headers
         checkDir(songinfo['savedir'])
@@ -30,23 +35,31 @@ class Downloader():
                     total_size, chunk_size = int(response.headers['content-length']), 1024
                     label = '[FileSize]: %0.2fMB' % (total_size / 1024 / 1024)
                     with click.progressbar(length=total_size, label=label) as progressbar:
-                        with open(os.path.join(songinfo['savedir'], songinfo['savename']+'.'+songinfo['ext']), 'wb') as fp:
+                        with open(os.path.join(songinfo['savedir'], songinfo['savename'] + '.' + songinfo['ext']),
+                                  'wb') as fp:
                             for chunk in response.iter_content(chunk_size=chunk_size):
                                 if chunk:
                                     fp.write(chunk)
                                     progressbar.update(len(chunk))
+                    # save songinfo json.
+                    with open(os.path.join(songinfo['savedir'], songinfo['savename'] + '.json'), 'w') as fpj:
+                        print("TEST:", json.dumps(songinfo))
+                        fpj.write(json.dumps(songinfo))
+
                     is_success = True
         except:
             is_success = False
         return is_success
+
     '''设置请求头'''
+
     def __setheaders(self, source):
         self.qq_headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
             'Referer': 'http://y.qq.com',
         }
         self.migu_headers = {
-            'Referer': 'https://m.music.migu.cn/', 
+            'Referer': 'https://m.music.migu.cn/',
             'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Mobile Safari/537.36',
         }
         self.kuwo_headers = {
