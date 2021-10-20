@@ -5,4 +5,4 @@ An open-source mini music player that you can download and play music you want t
 1. create envs from 'env.yaml'
 2. run "openi_player_main.py" in envs.
 
-![image](https://github.com/lexsaints/powershell/blob/master/IMG/ps2.png)
+![image](https://github.com/liziru/openi_music_player/blob/main/openi_player_ui.png)
